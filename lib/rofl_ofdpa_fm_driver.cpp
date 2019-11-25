@@ -1054,6 +1054,7 @@ cofflowmod rofl_ofdpa_fm_driver::enable_policy_ipv6_multicast(
 }
 
 cofflowmod rofl_ofdpa_fm_driver::enable_policy_arp(uint8_t ofp_version,
+                                                   uint32_t port_no,
                                                    bool update) {
 
   cofflowmod fm(ofp_version);
@@ -1066,6 +1067,7 @@ cofflowmod rofl_ofdpa_fm_driver::enable_policy_arp(uint8_t ofp_version,
   fm.set_command(update ? OFPFC_MODIFY : OFPFC_ADD);
 
   fm.set_match().set_eth_type(ETH_P_ARP);
+  fm.set_match().set_in_port(port_no);
 
   fm.set_instructions()
       .set_inst_apply_actions()
